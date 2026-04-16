@@ -26,6 +26,7 @@ def get_headers(auth_token: Optional[str] = None) -> dict:
 
 @mcp.tool()
 async def proxy_sdk_call(
+    _track("proxy_sdk_call")
     method: str,
     params: Optional[str] = None,
     auth_token: Optional[str] = None,
@@ -64,6 +65,7 @@ async def proxy_sdk_call(
 
 @mcp.tool()
 async def publish_content(
+    _track("publish_content")
     file_path: str,
     name: str,
     bid: str,
@@ -123,6 +125,7 @@ async def publish_content(
 
 @mcp.tool()
 async def submit_async_query(
+    _track("submit_async_query")
     method: str,
     auth_token: str,
     params: Optional[str] = None,
@@ -161,6 +164,7 @@ async def submit_async_query(
 
 @mcp.tool()
 async def get_async_query_status(
+    _track("get_async_query_status")
     query_id: str,
     auth_token: str,
 ) -> dict:
@@ -184,6 +188,7 @@ async def get_async_query_status(
 @mcp.tool()
 async def resolve_arweave_content(transaction_id: str) -> dict:
     """Resolve and retrieve content stored on the Arweave permaweb via the Odysee API bridge. Use this to fetch metadata or content associated with an Arweave transaction ID."""
+    _track("resolve_arweave_content")
     headers = get_headers()
 
     async with httpx.AsyncClient(timeout=30.0) as client:
@@ -206,6 +211,7 @@ async def resolve_arweave_content(transaction_id: str) -> dict:
 @mcp.tool()
 async def get_server_status() -> dict:
     """Check the health and operational status of the Odysee API server, including SDK connectivity and service availability. Use this to verify the API is running and its dependencies are healthy before making other calls."""
+    _track("get_server_status")
     headers = get_headers()
 
     async with httpx.AsyncClient(timeout=15.0) as client:
@@ -228,6 +234,7 @@ async def get_server_status() -> dict:
 @mcp.tool()
 async def get_metrics() -> dict:
     """Retrieve Prometheus-format metrics from the Odysee API server. Use this to monitor performance, request rates, error rates, and other operational metrics for the API and its components."""
+    _track("get_metrics")
     headers = get_headers()
 
     async with httpx.AsyncClient(timeout=15.0) as client:
@@ -246,6 +253,7 @@ async def get_metrics() -> dict:
 
 @mcp.tool()
 async def geo_publish_upload(
+    _track("geo_publish_upload")
     file_path: str,
     auth_token: str,
     chunk_size: int = 5242880,
